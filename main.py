@@ -151,9 +151,9 @@ def exercice5B_interface():
 
     def afficher_exercice5B():
         resultat = ""
-        for i in range(1, 11):
+        for i in range(1, 10):
             resultat += f"Table de multiplication de {i} :\n"
-            resultat += "\t".join([f"{i} x {j} = {i * j}" for j in range(1, 11)]) + "\n\n"
+            resultat += "\t".join([f"{j} x {i} = {i * j}" for j in range(1, 11)]) + "\n\n"
         messagebox.showinfo("Résultat", resultat)
 
     bouton_valider = tk.Button(exercice5B_window, text="Afficher les tables", command=afficher_exercice5B)
@@ -171,10 +171,12 @@ def exercice6_interface():
     def calculer_exercice6():
         try:
             nombreUser = int(entry.get())
-            diviseurs = [i for i in range(1, nombreUser + 1) if nombreUser % i == 0]
+            diviseurs = [1]
+            diviseurs = diviseurs + [i for i in range(2, nombreUser // 2 + 1) if nombreUser % i == 0] + [nombreUser]
             messagebox.showinfo("Résultat", f"Les diviseurs de {nombreUser} sont : {diviseurs}")
         except ValueError:
             messagebox.showerror("Erreur", "Veuillez entrer un nombre entier valide.")
+            calculer_exercice6()
 
     bouton_valider = tk.Button(exercice6_window, text="Afficher les diviseurs", command=calculer_exercice6)
     bouton_valider.pack(pady=10)
